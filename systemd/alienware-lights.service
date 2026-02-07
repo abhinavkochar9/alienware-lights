@@ -1,0 +1,12 @@
+[Unit]
+Description=Set Alienware RGB lights at boot
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 2
+ExecStart=/usr/local/bin/alienware-lights static FF1493
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

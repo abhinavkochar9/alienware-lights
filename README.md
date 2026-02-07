@@ -17,7 +17,7 @@ May work on other Alienware models that use the same USB vendor/product IDs (`0d
 ## Installation
 
 ```bash
-git clone https://github.com/arkrnr/alienware-lights.git
+git clone https://github.com/abhinavkochar9/alienware-lights.git
 cd alienware-lights
 pip install .
 ```

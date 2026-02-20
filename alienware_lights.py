@@ -219,14 +219,16 @@ class Tron:
         """Set logos with power animation (0x22) across all power states."""
         if zones is None:
             zones = self.LOGO_ZONES
+        # Commit any pending user animation first
+        self._send([0x21, 0x00, 0x03, 0x00, 0xFF])
+        time.sleep(0.05)
         for state in self.POWER_STATES:
             self._send([0x22, 0x00, 0x04, 0x00, state])  # remove
             self._send([0x22, 0x00, 0x01, 0x00, state])  # start new
             self._send([0x23, 0x01, 0x00, len(zones)] + zones)
             self._send([0x24] + actions)
             self._send([0x22, 0x00, 0x02, 0x00, state])  # save
-            self._send([0x22, 0x00, 0x06, 0x00, state])  # default
-        self._send([0x21, 0x00, 0x03, 0x00, 0xFF])  # play
+        self._send([0x21, 0x00, 0x05, 0x00, 0xFF])  # play
 
     def _static_action(self, r, g, b):
         return [self.COLOR_EFFECT, 0x07, self.COLOR_MODE, 0x00, 0xFA, r, g, b]
